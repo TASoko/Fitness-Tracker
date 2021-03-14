@@ -21,9 +21,9 @@ db.on("error", (error) => {
   console.log("Database Error:", error);
 });
 
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname + "./public/index.html"));
-// });
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname + "./public.index.html"));
+});
 
 // app.post("/submit", (req, res) => {
 //   console.log(req.body);
