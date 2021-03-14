@@ -4,20 +4,13 @@ const Schema = mongoose.Schema;
 
 const workoutSeed = new Schema({
   day: {
-    type: String,
-    trim: true,
-    required: "Enter a name for transaction",
-  },
-  value: {
-    type: Number,
-    required: "Enter an amount",
-  },
-  date: {
     type: Date,
-    default: Date.now,
+  },
+  exercises: {
+    type: String,
   },
 });
 
-const Workout = mongoose.model("Transaction", workoutSeed);
+const Workout = mongoose.model("Workout", workoutSeed);
 
 module.exports = Workout;
