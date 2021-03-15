@@ -16,9 +16,11 @@ app.use(express.static("public"));
 const PORT = process.env.PORT || 3000;
 
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Workout", {
   useNewUrlParser: true,
   useFindAndModify: false,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 
 // routes
