@@ -1,3 +1,7 @@
+const express = require("express");
+const db = require("../models");
+const app = express();
+
 
 // app.post("/submit", (req, res) => {
 //   console.log(req.body);
@@ -11,15 +15,25 @@
 //   });
 // });
 
-// app.get("/all", (req, res) => {
-//   db.workouts.find({}, (error, data) => {
-//     if (error) {
-//       res.send(error);
-//     } else {
-//       res.json(data);
-//     }
-//   });
-// });
+app.get("/all", (req, res) => {
+    db.Workout.find({})
+      .then((dbWorkout) => {
+        res.json(dbWorkout);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+
+  // db.Workout.find({}, (error, data) => {
+  //   if (error) {
+  //     res.send(error);
+  //     console.log("It didn't work");
+  //   } else {
+  //     res.json(data);
+  //     console.log("something is working");
+  //   }
+  // });
+});
 
 // app.get("/find/:id", (req, res) => {
 //   db.workouts.findOne(
@@ -82,3 +96,4 @@
 //     }
 //   });
 // });
+module.exports = app
