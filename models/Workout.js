@@ -14,12 +14,12 @@ const workoutSchema = new Schema({
         trim: true,
         require: "You need a valid exercise name",
       },
-      type: String,
-      duration: Number,
-      weight: Number,
-      reps: Number,
-      sets: Number,
-      distance: Number
+      type: { type: String },
+      duration: { type: Number },
+      weight: { type: Number },
+      reps: { type: Number },
+      sets: { type: Number },
+      distance: { type: Number },
     },
   ],
 });
