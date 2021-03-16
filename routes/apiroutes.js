@@ -1,17 +1,45 @@
 const db = require("../models");
 
 module.exports = (app) => {
-
   //The first function wants me to get everything so findall for api/workouts
   app.get("/api/workouts", (req, res) => {
     db.Workout.find({})
       .then((dbWorkout) => {
         res.json(dbWorkout);
+        console.log(dbWorkout);
       })
       .catch((err) => {
         res.json(err);
       });
   });
+
+  // Aggregated workout duration
+  // app.get("/api/workouts", (req, res) => {
+  //   db.Workout.aggregate([
+  //     {
+  //       $group: {
+  //         day: "$day",
+  //         name: "$name",
+  //         type: "$type",
+  //         duration: {$sum: "$duration"},
+  //         weight: "$weight",
+  //         reps: "$reps",
+  //         sets: "$sets",
+  //         distance: "$distance",
+  //       },
+  //     //   $addFields: {
+  //     //     duration: { $sum: "$duration" },
+  //     //   },
+  //     },
+  //   ])
+  //     .then((dbWorkout) => {
+  //       res.json(dbWorkout);
+  //       console.log(dbWorkout);
+  //     })
+  //     .catch((err) => {
+  //       res.json(err);
+  //     });
+  // });
 
   //route for getWorkoutsInRange function
   app.get("/api/workouts/range", (req, res) => {
@@ -39,14 +67,12 @@ module.exports = (app) => {
 
   //route for addExercise
   app.put("/api/workouts/:id", (req, res) => {
-    db.Workout.findByIdAndUpdate(
-       req.params.id,
-      { $push: { exercises: req.body } }
-    )
+    db.Workout.findByIdAndUpdate(req.params.id, {
+      $push: { exercises: req.body },
+    })
       .then((data) => {
         res.json(data);
       })
       .catch((err) => console.log(err));
   });
-
 };
