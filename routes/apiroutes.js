@@ -2,44 +2,23 @@ const db = require("../models");
 
 module.exports = (app) => {
   //The first function wants me to get everything so findall for api/workouts
+  // Aggregated workout duration
   app.get("/api/workouts", (req, res) => {
-    db.Workout.find({})
+    db.Workout.aggregate([
+      {
+        $addFields: {
+          totalDuration: { $sum: "$exercises.duration" },
+        },
+      },
+    ])
       .then((dbWorkout) => {
-        res.json(dbWorkout);
         console.log(dbWorkout);
+        res.json(dbWorkout);
       })
       .catch((err) => {
         res.json(err);
       });
   });
-
-  // Aggregated workout duration
-  // app.get("/api/workouts", (req, res) => {
-  //   db.Workout.aggregate([
-  //     {
-  //       $group: {
-  //         day: "$day",
-  //         name: "$name",
-  //         type: "$type",
-  //         duration: {$sum: "$duration"},
-  //         weight: "$weight",
-  //         reps: "$reps",
-  //         sets: "$sets",
-  //         distance: "$distance",
-  //       },
-  //     //   $addFields: {
-  //     //     duration: { $sum: "$duration" },
-  //     //   },
-  //     },
-  //   ])
-  //     .then((dbWorkout) => {
-  //       res.json(dbWorkout);
-  //       console.log(dbWorkout);
-  //     })
-  //     .catch((err) => {
-  //       res.json(err);
-  //     });
-  // });
 
   //route for getWorkoutsInRange function
   app.get("/api/workouts/range", (req, res) => {
