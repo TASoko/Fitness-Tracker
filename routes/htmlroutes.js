@@ -1,7 +1,10 @@
+//Depedency
 var path = require("path");
 
+//The code below is the routes to the html pages. We use path to make sure the paths work regardless of the computer.
+//Each route corresponds to the right html file
 module.exports = function (app) {
-  //get give two parameters, first is url then function that gets a request and response
+
   app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
