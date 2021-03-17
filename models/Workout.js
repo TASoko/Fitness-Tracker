@@ -1,8 +1,11 @@
+//This file is to create the database using mongoose.
+//We start by requiring mongoose and creating the const Schema.
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-
+//In mongoDB this is how we create a table(collection)
 const workoutSchema = new Schema({
+//Each entry in the table needs the following inputs
   day: {
     type: Date,
     default: () => new Date(),
@@ -24,6 +27,7 @@ const workoutSchema = new Schema({
   ],
 });
 
+//we need this to be used elsehwere in the app so we make a variable to capture that export it
 const Workout = mongoose.model("Workout", workoutSchema);
 
 module.exports = Workout;
