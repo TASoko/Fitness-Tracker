@@ -1,3 +1,4 @@
+//The dependencies 
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
@@ -12,10 +13,10 @@ app.use(express.json());
 app.use(express.static("public"));
 
 
-
+//Where the app will be running locally
 const PORT = process.env.PORT || 3000;
 
-
+//Needed to be able to be used on heroku
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
   useFindAndModify: false,
@@ -23,10 +24,11 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useCreateIndex: true,
 });
 
-// routes
+// Below are the routes the app will be using
 require("./routes/apiroutes.js")(app);
 require("./routes/htmlroutes.js")(app);
 
+//Needed to run the app locally using localhost
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });
